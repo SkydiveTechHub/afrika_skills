@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Sidebar, { AppSidebar } from "./Sidebar";
+// import Sidebar, { AppSidebar } from "./Sidebar";
+import { AppSidebar } from "./Sidebar";
 import Navbar from "./Navbar";
 
 

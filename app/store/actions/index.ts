@@ -1,39 +1,54 @@
+import { Dispatch } from "@reduxjs/toolkit";
 import { setError, stopLoad } from "../slices/appSlice";
 
-export const handleError = (err:any, dispatch:any) => {
-  // handle non-server based erorrs
-  if (!err.response && !err.data)
-    dispatch(
-      setError("There seems to be an issue currently, please try again")
-    );
-  else if (!err.response) dispatch(setError(err.data.message));
-  // handle server server based errors
+export interface ApiError {
+  response?: {
+    data: {
+      customMessage?: string;
+      message?: string;
+      statusCode?: number;
+      [key: string]: unknown;
+    };
+  };
+  data?: {
+    message?: string;
+  };
+}
+
+export const handleError = (err: unknown, dispatch: Dispatch) => {
+  const error = err as ApiError;
+
+  // Handle non-server-based errors
+  if (!error.response && !error.data) {
+    dispatch(setError("There seems to be an issue currently, please try again"));
+  } else if (!error.response) {
+    dispatch(setError(error.data?.message || "An error occurred"));
+  } 
+  // Handle server-based errors
   else {
     let msg =
-      err.response.data.customMessage ||
-      err.response.data.message ||
-      err.response.data;
-    if (typeof msg === "object")
-      msg = msg.reduce((aggr:string, errObj:any) => aggr + errObj.msg + ",", "");
-    dispatch(setError(msg));
+      error.response.data.customMessage ||
+      error.response.data.message ||
+      (error.response.data as unknown);
+
+    // Handle array-like errors
+    if (typeof msg === "object" && Array.isArray(msg)) {
+      msg = msg.reduce((aggr: string, errObj: { msg: string }) => aggr + errObj.msg + ",", "");
+    }
+
+    dispatch(setError(String(msg)));
     dispatch(stopLoad());
   }
-  if (err.response?.data?.statusCode === 401) {
 
+  // Handle unauthorized error
+  if (error.response?.data?.statusCode === 401) {
     localStorage.clear();
   }
+
   throw err;
 };
 
 
 export {
-    loginUser,
-} from "./authAction";
-
-export{
-  getJobPost,
-  createJobPost,
-  editJobPost,
-  deleteJobPost,
-  getJobPosts
-} from "./jobAction"
+  loginUser
+} from './authAction'

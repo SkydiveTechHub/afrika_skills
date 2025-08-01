@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios'
 import api from '../../../lib/api/axios/baseAxios'
 
 export interface JobType{
@@ -31,9 +32,10 @@ class JobService {
 
       const res = await api.get(`job/${data.id}`)
       return res.data
-    } catch (error: any) {
-      console.error("Login failed:", error)
-      throw error
+    } catch (error) {
+      const err = error as AxiosError<{ message?: string }>;
+      console.error("Login failed:", err.response?.data?.message ?? err.message);
+      throw err;
     }
   }
   static async GetJobPosts(data:{page:number, location:string, status?:string}) {
@@ -41,9 +43,10 @@ class JobService {
 
       const res = await api.get(`job?page=${data.page}&limit=10&location=${data.location}`)
       return res.data
-    } catch (error: any) {
-      console.error("Login failed:", error)
-      throw error
+    } catch (error) {
+      const err = error as AxiosError<{ message?: string }>;
+      console.error("Login failed:", err.response?.data?.message ?? err.message);
+      throw err;
     }
   }
 
@@ -52,9 +55,10 @@ class JobService {
 
       const res = await api.post(`job`, data.payload)
       return res.data
-    } catch (error: any) {
-      console.error("Login failed:", error)
-      throw error
+    } catch (error) {
+      const err = error as AxiosError<{ message?: string }>;
+      console.error("Login failed:", err.response?.data?.message ?? err.message);
+      throw err;
     }
   }
   static async EditJobPost(data: JobType) {
@@ -62,9 +66,10 @@ class JobService {
 
       const res = await api.put(`job/${data.id}`, data.payload)
       return res.data
-    } catch (error: any) {
-      console.error("Login failed:", error)
-      throw error
+    } catch (error) {
+      const err = error as AxiosError<{ message?: string }>;
+      console.error("Login failed:", err.response?.data?.message ?? err.message);
+      throw err;
     }
   }
   static async DeleteJobPost(data: { email: string; password: string }) {
@@ -75,9 +80,10 @@ class JobService {
         password: data.password,
       })
       return res.data
-    } catch (error: any) {
-      console.error("Login failed:", error)
-      throw error
+    } catch (error) {
+      const err = error as AxiosError<{ message?: string }>;
+      console.error("Login failed:", err.response?.data?.message ?? err.message);
+      throw err;
     }
   }
 }

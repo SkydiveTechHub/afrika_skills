@@ -25,7 +25,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+//   DialogTrigger,
 } from "@/components/ui/dialog"
 import StatusPill from '@/components/StatusPill'
 import { Checkbox } from '@/components/ui/checkbox'

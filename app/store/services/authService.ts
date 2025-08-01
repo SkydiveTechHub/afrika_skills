@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import api from '../../../lib/api/axios/baseAxios'
 
 class AuthService {
@@ -19,10 +20,11 @@ class AuthService {
 
       // Return response data
       return res.data
-    } catch (error: any) {
-      // Optional: Add error logging or toast here
-      console.error("Login failed:", error)
-      throw error
+      return res.data
+    } catch (error) {
+      const err = error as AxiosError<{ message?: string }>;
+      console.error("Login failed:", err.response?.data?.message ?? err.message);
+      throw err;
     }
   }
 }

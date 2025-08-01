@@ -3,10 +3,10 @@
 import { DataTable } from '@/components/DataTable'
 import { jobs } from '@/lib/types'
 import { ColumnDef } from '@tanstack/react-table'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
+  // DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -21,7 +21,7 @@ import Image from 'next/image'
 import { DescText, TitleText } from '@/components/Typo'
 import Link from 'next/link'
 
-const page = () => {
+const Job = () => {
   const [tableData, setTableData] = useState([])
   const columns: ColumnDef<jobs>[] = [
     {
@@ -82,6 +82,10 @@ const page = () => {
     },
   ]
 
+  useEffect(()=>{
+    setTableData([])
+  },[])
+
   const JobEmptyState = () =>{
     return(
       <Card className='w-[250px] mx-auto'>
@@ -116,4 +120,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Job

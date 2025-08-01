@@ -2,7 +2,7 @@ import { PrimaryContainer } from '@/components/Containers'
 import { CreatePostButton } from '@/components/CreatePostButton'
 import { DescText, TitleText } from '@/components/Typo'
 import { Button } from '@/components/ui/button'
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card,  CardFooter, CardHeader } from '@/components/ui/card'
 import { Plus } from 'lucide-react'
 import React from 'react'
 

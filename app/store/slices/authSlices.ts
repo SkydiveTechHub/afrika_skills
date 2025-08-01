@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import type { PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../store'
 import { loginUser } from '../actions'
 
@@ -8,9 +7,13 @@ interface Hub {
   companyName:string;
 }
 
+interface UserInfo{
+  name:string
+}
+
 interface AuthState {
   token: string | null;
-  userInfo: any | null;
+  userInfo: UserInfo | null;
   isApproved: boolean;
   organisations: Hub[]
   isAuthenticated: boolean
@@ -29,6 +32,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     checkAuth: (state) => {
+      console.log(state)
       // logic to check auth from localStorage or elsewhere can go here
     },
     logout: (state) => {
