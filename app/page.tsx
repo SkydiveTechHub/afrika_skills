@@ -25,7 +25,7 @@ export default function EmployerLoginForm() {
 
   const handleSubmit = () =>{
     setIsLoading(true)
-    router.replace('/dashboard/admin-post/job')
+    router.replace('/dashboard/admin-post')
   }
 	// Validate entire form for submission
 

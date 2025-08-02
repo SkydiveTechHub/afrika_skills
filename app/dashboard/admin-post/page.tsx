@@ -1,16 +1,20 @@
+'use client'
+
 import { PrimaryContainer } from '@/components/Containers'
 import { CreatePostButton } from '@/components/CreatePostButton'
 import { DescText, TitleText } from '@/components/Typo'
 import { Button } from '@/components/ui/button'
 import { Card,  CardFooter, CardHeader } from '@/components/ui/card'
 import { Plus } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const AdminPost = () => {
+  const router = useRouter()
      const tabOptions = [
     {
       name:'Job',
-      action: ()=>{}
+      action: ()=>{router.push('/dashboard/admin-post/job')}
     },
     {
       name:'Procuements',
