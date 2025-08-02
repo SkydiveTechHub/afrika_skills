@@ -28,11 +28,11 @@ const data = {
         { title: "Dashboard", url: "/dashboard" },
         {
           title: "Admin Post",
-          url: "/admin-post",
+          url: "/dashboard/admin-post",
           items: [
             {
               title: "Jobs",
-              url: "/admin-post/jobs",
+              url: "/dashboard/admin-post/jobs",
             },
           ],
         },
