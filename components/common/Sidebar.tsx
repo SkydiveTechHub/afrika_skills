@@ -32,7 +32,7 @@ const data = {
           items: [
             {
               title: "Jobs",
-              url: "/dashboard/admin-post/jobs",
+              url: "/dashboard/admin-post/job",
             },
           ],
         },
